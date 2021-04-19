@@ -2,6 +2,7 @@ package com;
 
 //For REST Service
 import javax.ws.rs.*;
+
 import javax.ws.rs.core.MediaType;
 //For JSON
 import com.google.gson.*;
@@ -19,7 +20,7 @@ public class UsersService {
 	Users  usersobj = new Users();
 	
 	
-	// view Users details
+	// view Users details(for admin)
 	
 	  @GET
 	  

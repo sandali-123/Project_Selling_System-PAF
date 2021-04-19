@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -293,7 +294,7 @@ public class Users {
 
 
 	
-	// read users
+	// read users(for Admin)
 	public String viewRegUsers() {
 		// TODO Auto-generated method stub
 		String output = "";
