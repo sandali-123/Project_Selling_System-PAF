@@ -20,7 +20,7 @@ public class UsersService {
 	Users  usersobj = new Users();
 	
 	
-	// view Users details(for admin)
+	// read users(for Admin)
 	
 	  @GET
 	  
@@ -31,7 +31,32 @@ public class UsersService {
 	  return usersobj.viewRegUsers();
 	  
 	  }
-	 
+	  
+	// view profile details
+		@GET
+		@Path("/profile/{U_id}")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
+		//@Produces(MediaType.TEXT_HTML)
+		public String readprofile(@PathParam("U_id") String U_id) {
+		
+			return usersobj.viewProfile(U_id);
+		
+			
+		}
+		
+		
+		//find details of a certain user type(for admin)
+		@GET
+		@Path("/{type}")
+		@Produces(MediaType.TEXT_PLAIN)
+		public String readUserType(@PathParam("type") String type)
+		 {
+			return usersobj.readUserType(type); 
+		 }
+		
+	  
+
 	
 	//insert Users
 	@POST
@@ -64,7 +89,7 @@ public class UsersService {
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.TEXT_PLAIN)
-		public String updatepatient(String pdata) {
+		public String updateUser(String pdata) {
 
 			JsonObject userObj2 = new JsonParser().parse(pdata).getAsJsonObject();
 
@@ -86,6 +111,38 @@ public class UsersService {
 			return output;
 		}
 		
+		
+	/*
+	 * //change password
+	 * 
+	 * @PUT
+	 * 
+	 * @Path("/")
+	 * 
+	 * @Consumes(MediaType.APPLICATION_JSON)
+	 * 
+	 * @Produces(MediaType.TEXT_PLAIN)
+	 * 
+	 * public String changePassword(String pdata) {
+	 * 
+	 * JsonObject userObj2 = new JsonParser().parse(pdata).getAsJsonObject();
+	 * 
+	 * // String U_id = userObj2.get("U_id").getAsString();
+	 * 
+	 * String username = userObj2.get("username").getAsString(); String password =
+	 * userObj2.get("password").getAsString();
+	 * 
+	 * 
+	 * 
+	 * 
+	 * String output = usersobj.updatePassword( username, password);
+	 * 
+	 * return output; }
+	 */
+	  
+	  
+	  
+	  
 		//delete profile details
 		@DELETE
 		@Path("/")
@@ -99,23 +156,7 @@ public class UsersService {
 
 			return output;
 		}
-	
-
-	// view profile details
-	@GET
-	@Path("/profile/{U_id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	//@Produces(MediaType.TEXT_HTML)
-	public String readprofile(@PathParam("U_id") String U_id) {
-	
-		return usersobj.viewProfile(U_id);
-	
 		
-	}
-	
-	
-	
 	
 	// login
 		@POST
