@@ -117,6 +117,7 @@ public class Users {
 	      preparedStmt.setString(6, email); 
 	      preparedStmt.setString(7, username); 
 	      preparedStmt.setString(8, Base64.getEncoder().encodeToString( password.getBytes()));
+	      //preparedStmt.setString(8,  password);
 	      preparedStmt.setInt(9, Integer.parseInt(ID)); 
 	 
 	      preparedStmt.execute();   
@@ -229,10 +230,16 @@ public class Users {
 			//System.out.println("1111");
 			System.out.println(preparedStmt);
 			System.out.println(username);
-			System.out.println(password);
+			System.out.println(Base64.getEncoder().encodeToString( password.getBytes()));
+			
+			
+			
+			
+//			byte[] decodedBytes = Base64.getDecoder().decode(password);
+//			String decodedString = new String(decodedBytes);
 			
 			preparedStmt.setString(1,username);
-			preparedStmt.setString(2, password);
+			preparedStmt.setString(2, Base64.getEncoder().encodeToString( password.getBytes()));
 			//System.out.println("222");
 			
 			
@@ -241,6 +248,11 @@ public class Users {
 
 			if(rs.next()) {
 				con.close();
+				if(username.equals("admin"))
+				{
+					
+					return "You are now logged in.";
+				}
 				return "Hi"+" "+username+"."+"You are now successfully logged in.";
 			}
 			else {
@@ -288,7 +300,7 @@ public class Users {
 				return "Error while connecting to the database for reading.";
 			}
 
-			output = "<table border=\"1\"><tr><th>First Name</th><th>Last Name</th><th>NIC</th><th>Address</th><th>Phone Number</th><th>E-mail</th><th>Username</th><th>Password</th></tr>";
+			output = "<table border=\"1\"><tr><th>First Name</th><th>Last Name</th><th>NIC</th><th>Address</th><th>Phone Number</th><th>E-mail</th><th>Username</th><th>Password</th><th>Update</th><th>Remove</th></tr>";
 
 			String query = "select *  from users where U_id=' " + U_id + "'" ;
 			
@@ -325,15 +337,13 @@ public class Users {
 				
 				
 				
-				
-				/*
-				 * output +=
-				 * "<td><input name=\"btnUpdate\" type=\"button\"  value=\"Update\" class=\"btn btn-secondary\"></td>"
-				 * + "<td><form method=\"post\" action=\"UsertReg.jsp\">" +
-				 * "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"  class=\"btn btn-danger\">"
-				 * + "<input name=\"UserID\" type=\"hidden\" value=\"" + user + "\">" +
-				 * "</form></td></tr>";
-				 */
+				  output +=
+				  "<td><input name=\"btnUpdate\" type=\"button\"  value=\"Update\" class=\"btn btn-secondary\"></td>"
+				  + "<td><form method=\"post\" action=\"UsertReg.jsp\">" +
+				  "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"  class=\"btn btn-danger\">"
+				  + "<input name=\"UserID\" type=\"hidden\" value=\"" + user + "\">" +
+				  "</form></td></tr>";
+				 
 			}
 			
 			con.close();
@@ -364,7 +374,7 @@ public class Users {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>First Name</th><th>Last Name</th><th>NIC</th><th>Address</th><th>Phone Number</th><th>E-mail</th><th>Username</th></tr>";
+			output = "<table border=\"1\"><tr><th>First Name</th><th>Last Name</th><th>NIC</th><th>Address</th><th>Phone Number</th><th>E-mail</th><th>Username</th><th>Password</th><th>Update</th><th>Remove</th></tr>";
 
 			String query = "select * from users where type =?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -396,14 +406,15 @@ public class Users {
 				output += "<td>" + password + "</td>";
 				
 				
-				/*
-				 * // buttons output +=
-				 * "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
-				 * + "<td><form method='post' action='items.jsp'>" +
-				 * "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
-				 * + "<input name='userID' type='hidden' value='" + U_id + "'>" +
-				 * "</form></td></tr>";
-				 */
+				
+				  output +=
+						  "<td><input name=\"btnUpdate\" type=\"button\"  value=\"Update\" class=\"btn btn-secondary\"></td>"
+						  + "<td><form method=\"post\" action=\"UsertReg.jsp\">" +
+						  "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"  class=\"btn btn-danger\">"
+						  + "<input name=\"UserID\" type=\"hidden\" value=\"" + user + "\">" +
+						  "</form></td></tr>";
+				  
+			
 			}
 			con.close();
 
@@ -428,7 +439,7 @@ public class Users {
 		 if (con == null)
 		 {return "Error while connecting to the database for reading."; }
 		 // Prepare the html table to be displayed
-		 output = "<table border=\"1\"><tr><th>First Name</th><th>Last Name</th><th>NIC</th><th>Address</th><th>Phone Number</th><th>E-mail</th><th>Username</th></tr>";
+		 output = "<table border=\"1\"><tr><th>First Name</th><th>Last Name</th><th>NIC</th><th>Address</th><th>Phone Number</th><th>E-mail</th><th>Username</th><th>Password</th><th>Update</th><th>Remove</th></tr>";
 
 
 		 String query = "select * from users";
@@ -447,7 +458,7 @@ public class Users {
 				String phone = rs.getString("phone");
 				String email = rs.getString("email");
 				String username = rs.getString("username");
-				//String password = rs.getString("password");
+				String password = rs.getString("password");
 				
 		 
 		 // Add into the html table
@@ -459,18 +470,18 @@ public class Users {
 				output += "<td>" + phone + "</td>";
 				output += "<td>" + email + "</td>";
 				output += "<td>" + username + "</td>";
-				//output += "<td>" + password + "</td>";
+				output += "<td>" + password + "</td>";
 		 
-				/*
-				 * // buttons
-				 * 
-				 * output +=
-				 * "<td><input name=\"btnUpdate\" type=\"button\"  value=\"Update\" class=\"btn btn-secondary\"></td>"
-				 * + "<td><form method=\"post\" action=\"UserReg.jsp\">" +
-				 * "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"  class=\"btn btn-danger\">"
-				 * + "<input name=\"UserID\" type=\"hidden\" value=\"" + user + "\">" +
-				 * "</form></td></tr>";
-				 */
+				
+				  // buttons
+				  
+				  output +=
+				  "<td><input name=\"btnUpdate\" type=\"button\"  value=\"Update\" class=\"btn btn-secondary\"></td>"
+				  + "<td><form method=\"post\" action=\"UserReg.jsp\">" +
+				  "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"  class=\"btn btn-danger\">"
+				  + "<input name=\"UserID\" type=\"hidden\" value=\"" + user + "\">" +
+				  "</form></td></tr>";
+				 
 		
 		 }
 				con.close();
