@@ -2,7 +2,9 @@ package model;
 
 import java.sql.Connection;
 
+import java.sql.*;
 import java.sql.Statement;
+import java.util.Base64;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,7 +58,7 @@ public class Users {
 			preparedStmt.setString(6, phone);
 			preparedStmt.setString(7, email);
 			preparedStmt.setString(8, username);
-			preparedStmt.setString(9, password);
+			preparedStmt.setString(9,Base64.getEncoder().encodeToString( password.getBytes()));
 			preparedStmt.setString(10, "Buyer");
 			// execute the statement
 			
@@ -114,7 +116,7 @@ public class Users {
 	      preparedStmt.setString(5, phone); 
 	      preparedStmt.setString(6, email); 
 	      preparedStmt.setString(7, username); 
-	      preparedStmt.setString(8, password);
+	      preparedStmt.setString(8, Base64.getEncoder().encodeToString( password.getBytes()));
 	      preparedStmt.setInt(9, Integer.parseInt(ID)); 
 	 
 	      preparedStmt.execute();   
