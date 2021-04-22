@@ -75,7 +75,7 @@ public class PaymentService {
 
 			JsonObject payObj2 = new JsonParser().parse(paydata).getAsJsonObject();
 
-			int Pay_id = payObj2.get("Pay_id").getAsInt();
+			String Pay_id = payObj2.get("Pay_id").getAsString();
 			int order_ID = payObj2.get("order_ID").getAsInt();
 			String Cus_Name = payObj2.get("Cus_Name").getAsString();
 			String Card_No = payObj2.get("Card_No").getAsString();
@@ -84,11 +84,8 @@ public class PaymentService {
 			String Exp_date =payObj2.get("Exp_date").getAsString();
 			String CVV = payObj2.get("CVV").getAsString();
 			String Payment_date =payObj2.get("Payment_date").getAsString();
-		
 			
-			
-			
-			String output = payObj2.updatePayment(Pay_id,order_ID, Cus_Name,Card_No, Bank,Tot_Amount,Exp_date,CVV,Payment_date);
+			String output = payObj.updatePayment(Pay_id,order_ID, Cus_Name,Card_No, Bank,Tot_Amount,Exp_date,CVV,Payment_date);
 
 			return output;
 		}

@@ -14,6 +14,7 @@ public class payment {
 		Connection con = null;
 
 		try {
+			
 
 			Class.forName("com.mysql.jdbc.Driver");
 			// Provide the correct details: DBServer/DBName, username, password
@@ -124,27 +125,29 @@ public class payment {
 	}
 
 //update Payment Details
-	public String updatePayment(int Pay_id, int order_ID, String Cus_Name, String Card_No, String Bank,
+	public String updatePayment(String Pay_id, int order_ID, String Cus_Name, String Card_No, String Bank,
 			String Tot_Amount, String Exp_date, String CVV, String Payment_date) {
+		
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
 				return "Error while connecting to the database for updating.";
 			}
 			// create a prepared statement
-			String query = "UPDATE payment SET Pay_id=?,order_ID =?,Cus_Name=?,Card_No=?,Bank=?,Tot_Amount=?,Exp_date=?,CVV=?,Payment_date=?, WHERE Pay_id=?";
+			String query = "UPDATE payment SET order_ID =?,Cus_Name=?,Card_No=?,Bank=?,Tot_Amount=?,Exp_date=?,CVV=?,Payment_date=?  WHERE Pay_id=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, Pay_id);
-			preparedStmt.setInt(2, order_ID);
-			preparedStmt.setString(3, Cus_Name);
-			preparedStmt.setString(4, Card_No);
-			preparedStmt.setString(5, Bank);
-			preparedStmt.setString(6, Tot_Amount);
-			preparedStmt.setString(7, Exp_date);
-			preparedStmt.setString(8, CVV);
-			preparedStmt.setString(9, Payment_date);
+			preparedStmt.setInt(1, order_ID);
+			preparedStmt.setString(2, Cus_Name);
+			preparedStmt.setString(3, Card_No);
+			preparedStmt.setString(4, Bank);
+			preparedStmt.setString(5, Tot_Amount);
+			preparedStmt.setString(6, Exp_date);
+			preparedStmt.setString(7, CVV);
+			preparedStmt.setString(8, Payment_date);
+			preparedStmt.setString(9,Pay_id);
 
 			// execute the statement
 			preparedStmt.execute();
