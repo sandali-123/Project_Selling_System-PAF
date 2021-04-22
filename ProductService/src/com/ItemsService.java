@@ -24,7 +24,7 @@ public class ItemsService {
 		return itemObj.readItem();
 	 } 
 	
-	//Insert items
+	//Insert item
 	@POST
 	@Path("/createitem")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
