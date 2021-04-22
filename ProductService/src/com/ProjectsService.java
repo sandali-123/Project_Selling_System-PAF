@@ -18,7 +18,7 @@ public class ProjectsService {
 	Projects ProjectObj = new Projects();
 	//read project
 	@GET
-	@Path("/")
+	@Path("/view")
 	@Produces(MediaType.TEXT_HTML)
 	
 	public String readProjects()
@@ -28,7 +28,7 @@ public class ProjectsService {
 	
 	//insert project
 	@POST
-	@Path("/")
+	@Path("/create")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	
@@ -51,7 +51,7 @@ public class ProjectsService {
 	//update project
 	
 	@PUT
-	@Path("/")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	
@@ -75,7 +75,7 @@ public class ProjectsService {
 	//delete projecct
 	
 	@DELETE
-	@Path("/")
+	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
 	

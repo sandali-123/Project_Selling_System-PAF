@@ -17,7 +17,7 @@ public class ItemsService {
 	
 	//Read items
 	@GET
-	@Path("/")
+	@Path("/viewitem")
 	@Produces(MediaType.TEXT_HTML)
 	public String readItems()
 	 {
@@ -26,7 +26,7 @@ public class ItemsService {
 	
 	//Insert items
 	@POST
-	@Path("/")
+	@Path("/createitem")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	
@@ -47,7 +47,7 @@ public class ItemsService {
 	
 	//update items
 	@PUT
-	@Path("/")
+	@Path("/updateitem")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateItem(String ItemData)
@@ -67,7 +67,7 @@ public class ItemsService {
 	
 	//delete items
 	@DELETE
-	@Path("/")
+	@Path("/deleteitem")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteItem(String ItemData)
