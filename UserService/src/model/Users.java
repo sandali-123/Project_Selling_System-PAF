@@ -94,6 +94,7 @@ public class Users {
 
 
 	//update profile details
+	
 	public String updateUserinfo(String ID,String fname, String lname, String nic, String address, String phone,String email,String username, String password)  {  
 		String output = ""; 
 
