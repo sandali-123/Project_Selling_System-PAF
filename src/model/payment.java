@@ -32,10 +32,9 @@ public class payment {
 
 		String output = "";
 
-		
 		boolean validate = false;
 		java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
- 
+
 		try {
 			Connection con = connect();
 			if (con == null) {
@@ -47,7 +46,7 @@ public class payment {
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setInt(1, 0);
-			preparedStmt.setInt(2, 0);
+			preparedStmt.setInt(2, order_ID);
 			preparedStmt.setString(3, Cus_Name);
 			preparedStmt.setString(4, Card_No);
 			preparedStmt.setString(5, Bank);
@@ -78,8 +77,8 @@ public class payment {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border='1'><tr><th>Order ID</th><th>Customer Name</th><th>Card Number</th>"
-					+ "<th>Bank</th>" + "<th>Total Amount</th>" + "<th>CVV</th>" + "<th>Expire Date</th>"
+			output = "<table border='1'><tr><th>Payment ID</th><th>Order ID</th><th>Customer Name</th><th>Card Number</th>"
+					+ "<th>Bank</th>" + "<th>Total Amount</th>" + "<th>Expire Date</th>" + "<th>CVV</th>"
 					+ "<th>Payment Date</th>" + "<th>Update</th><th>Remove</th></tr>";
 
 			String query = "select * from payment";
@@ -98,7 +97,7 @@ public class payment {
 				String Payment_date = rs.getString("Payment_date");
 
 				// Add into the html table
-			
+				output += "<td>" + Pay_id + "</td>";
 				output += "<td>" + order_ID + "</td>";
 				output += "<td>" + Cus_Name + "</td>";
 				output += "<td>" + Card_No + "</td>";
@@ -107,7 +106,7 @@ public class payment {
 				output += "<td>" + Exp_date + "</td>";
 				output += "<td>" + CVV + "</td>";
 				output += "<td>" + Payment_date + "</td>";
-			
+
 				// buttons
 				output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
 						+ "<td><form method='post' action='items.jsp'>"
@@ -125,42 +124,41 @@ public class payment {
 	}
 
 //update Payment Details
-	public String updatePayment(int Pay_id,int order_ID, String Cus_Name, String Card_No, String Bank, String Tot_Amount,String Exp_date , String CVV)
-	 { 
-	 String output = ""; 
-	 try
-	 { 
-	 Connection con = connect(); 
-	 if (con == null) 
-	 {return "Error while connecting to the database for updating."; } 
-	 // create a prepared statement
-	 String query = "UPDATE payment SET Pay_id=?,order_ID =?,Cus_Name=?,Card_No=?,Bank=?,Tot_Amount=?,Exp_date=?,CVV=?, WHERE Pay_id=?"; 
-	 PreparedStatement preparedStmt = con.prepareStatement(query); 
-	 // binding values
-	 preparedStmt.setInt(1, Pay_id);
-	 preparedStmt.setInt(2, order_ID);
-	 preparedStmt.setString(3, Cus_Name); 
-	 preparedStmt.setString(4, Card_No);
-	 preparedStmt.setString(5, Bank);
-	 preparedStmt.setString(6, Tot_Amount);
-	 preparedStmt.setString(7, Exp_date);
-	 preparedStmt.setString(8, CVV);
+	public String updatePayment(int Pay_id, int order_ID, String Cus_Name, String Card_No, String Bank,
+			String Tot_Amount, String Exp_date, String CVV, String Payment_date) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+			// create a prepared statement
+			String query = "UPDATE payment SET Pay_id=?,order_ID =?,Cus_Name=?,Card_No=?,Bank=?,Tot_Amount=?,Exp_date=?,CVV=?,Payment_date=?, WHERE Pay_id=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			preparedStmt.setInt(1, Pay_id);
+			preparedStmt.setInt(2, order_ID);
+			preparedStmt.setString(3, Cus_Name);
+			preparedStmt.setString(4, Card_No);
+			preparedStmt.setString(5, Bank);
+			preparedStmt.setString(6, Tot_Amount);
+			preparedStmt.setString(7, Exp_date);
+			preparedStmt.setString(8, CVV);
+			preparedStmt.setString(9, Payment_date);
 
-	 // execute the statement
-	 preparedStmt.execute(); 
-	 con.close(); 
-	 output = "Updated successfully"; 
-	 } 
-	 catch (Exception e) 
-	 { 
-	 output = "Error while updating the Payment"; 
-	 System.err.println(e.getMessage()); 
-	 } 
-	 return output; 
-	 }
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating the Payment";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 
 //delete payment
-	public String deletePayment(String ID) {
+	public String deletePayment(String Pay_id) {
 
 		String output = "";
 
@@ -178,7 +176,7 @@ public class payment {
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(ID));
+			preparedStmt.setInt(1, Integer.parseInt(Pay_id));
 
 			// execute the statement
 			preparedStmt.execute();

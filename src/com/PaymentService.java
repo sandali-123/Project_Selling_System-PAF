@@ -37,7 +37,7 @@ public class PaymentService {
 	@GET
 	@Path("/") 
 	@Produces(MediaType.TEXT_HTML) 
-	public String readItems() 
+	public String readPayment() 
 	 { 
 	 return payObj.readpayment(); 
 	 }
@@ -66,7 +66,47 @@ public class PaymentService {
 		 
 		}
 		
+		//update Payment details
+		@PUT  
+		@Path("/")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
+		public String updatePayment(String paydata) {
+
+			JsonObject payObj2 = new JsonParser().parse(paydata).getAsJsonObject();
+
+			int Pay_id = payObj2.get("Pay_id").getAsInt();
+			int order_ID = payObj2.get("order_ID").getAsInt();
+			String Cus_Name = payObj2.get("Cus_Name").getAsString();
+			String Card_No = payObj2.get("Card_No").getAsString();
+			String Bank = payObj2.get("Bank").getAsString();
+			String Tot_Amount = payObj2.get("Tot_Amount").getAsString();
+			String Exp_date =payObj2.get("Exp_date").getAsString();
+			String CVV = payObj2.get("CVV").getAsString();
+			String Payment_date =payObj2.get("Payment_date").getAsString();
 		
+			
+			
+			
+			String output = payObj2.updatePayment(Pay_id,order_ID, Cus_Name,Card_No, Bank,Tot_Amount,Exp_date,CVV,Payment_date);
+
+			return output;
+		}
+		
+		//delete Payment details
+				@DELETE
+				@Path("/")
+				@Consumes(MediaType.APPLICATION_XML)
+				@Produces(MediaType.TEXT_PLAIN)
+				public String deletePayment(String paydata) {
+					Document doc = Jsoup.parse(paydata, "", Parser.xmlParser());
+					String Pay_id = doc.select("Pay_id").text();
+ 
+					String output = payObj.deletePayment(Pay_id);
+
+					return output;
+				}
+				
 }
 	
 		
