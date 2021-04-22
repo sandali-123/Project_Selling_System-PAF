@@ -20,7 +20,7 @@ public class Order {
 	
 	    
 		/*
-		 * A common method to connect to the DB
+		 * A method to connect to the DB
 		 */
 		private Connection connect(){
 			
