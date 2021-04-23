@@ -154,7 +154,9 @@ public class OrderService {
 	 
 		//Read the value from the element <itemID>
 		String orderID = doc.select("orderID").text();
+		
 		String output = ordObj.deleteOrders(orderID);
+		
 		return output;
 	 
 	 

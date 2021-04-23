@@ -412,16 +412,6 @@ public class Order {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	   /*
 		* delete order details
 		*/ 
@@ -469,6 +459,14 @@ public class Order {
 	   }
 	
 	
+	
+	
+	
+	
+	
+	
+	
+
 
 
 
