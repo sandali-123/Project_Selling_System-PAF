@@ -54,7 +54,7 @@ public class Order {
 		
 		 
 		 /*
-		  * add orders 
+		  * add orders to the system
 		  */
 		 public String addOrders(String name ,String buyerID, String productID ,String projectID ,String price , int qty  ){
 		
@@ -79,15 +79,14 @@ public class Order {
 				}
 	
 				
-				
+				//select stock item quantity
 				String query2 = " select Stock_qty from items where Item_id = ?";
 				PreparedStatement preparedStmt2 = con.prepareStatement(query2);
 				preparedStmt2.setString(1, productID);
 				ResultSet rs = preparedStmt2.executeQuery();
 				
-				
-				
-				//newly added
+			
+				//select projects
 				String query3 = " select * from projects where Proj_id = ?";
 				PreparedStatement preparedStmt3 = con.prepareStatement(query3);
 				preparedStmt3.setString(1, projectID);
@@ -115,7 +114,7 @@ public class Order {
 				
 				
 				
-					//newly added
+				
 					if(validate || (!(projectID.isEmpty()))) {
 					
 			
@@ -241,7 +240,7 @@ public class Order {
 				
 			} catch (Exception e) {
 				
-				output = "Error while reading the orders.";
+				output = "Error while reading the orders details.";
 				System.err.println(e.getMessage());
 			}
 			
