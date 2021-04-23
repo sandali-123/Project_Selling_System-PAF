@@ -19,9 +19,9 @@ public class Order {
 	
 	
 	    
-		/*
-		 * A method to connect to the DB
-		 */
+	   /*
+		* A method to connect to the DB
+		*/
 		private Connection connect(){
 			
 			Connection con = null;
@@ -53,9 +53,9 @@ public class Order {
 	    
 		
 		 
-		 /*
-		  * add orders to the system
-		  */
+		/*
+		 * add orders to the system
+		 */
 		 public String addOrders(String name ,String buyerID, String productID ,String projectID ,String price , int qty  ){
 		
 		
@@ -174,8 +174,7 @@ public class Order {
 	   /*
 	    * view all order details
         */
-		
-	   public String viewOrders() {
+		public String viewOrders() {
 		
 			
 			String output = "";
@@ -260,9 +259,9 @@ public class Order {
 
 	
 
-	   /*
-		* view each  buyer order details
-		*/
+	  /*
+	   * view each  buyer order details
+	   */
 	   public String viewBuyerOrders(String BuyerID){
 		
 		
@@ -358,10 +357,9 @@ public class Order {
 	
 	
 	
-	   /*
-		* update order items quantity
-		*/ 
-	   
+	  /*
+	   * update order items quantity
+	   */ 
 	   public String updateOrders(String ID, int qty) {
 		
 			
@@ -412,10 +410,9 @@ public class Order {
 	
 	
 	
-	   /*
-		* delete order details
-		*/ 
-	   
+	  /*
+	   * delete order details
+	   */ 
 	   public String deleteOrders(String ID) {
 		
 			String output = "";
