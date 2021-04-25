@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2021 at 10:24 PM
+-- Generation Time: Apr 25, 2021 at 07:42 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -24,6 +24,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `U_id` int(30) NOT NULL,
+  `fname` varchar(250) NOT NULL,
+  `lname` varchar(250) NOT NULL,
+  `nic` varchar(250) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `phone` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `username` varchar(250) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `type` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
 -- Dumping data for table `users`
 --
 
@@ -37,6 +54,7 @@ INSERT INTO `users` (`U_id`, `fname`, `lname`, `nic`, `address`, `phone`, `email
 --
 -- Indexes for dumped tables
 --
+
 
 --
 -- Indexes for table `users`

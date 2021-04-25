@@ -235,11 +235,6 @@ public class Users {
 			System.out.println(Base64.getEncoder().encodeToString( password.getBytes()));
 
 
-
-
-			//			byte[] decodedBytes = Base64.getDecoder().decode(password);
-			//			String decodedString = new String(decodedBytes);
-
 			preparedStmt.setString(1,username);
 			preparedStmt.setString(2, Base64.getEncoder().encodeToString( password.getBytes()));
 			//System.out.println("222");
